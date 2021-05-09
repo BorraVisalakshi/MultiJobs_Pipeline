@@ -20,6 +20,7 @@ jobs:
   #Build with Maven Goals
     - name: Step-2 Build with Maven
       run: mvn clean install
+      
   # Upload to artifactory
     - name: Upload to Artifactory
       run:  Remove-item alias:curl;
@@ -48,11 +49,19 @@ jobs:
       run: mvn weblogic:deploy
       
   #Copy to local System from Remote Server
-   # - name: Copy to local from Remote     
-    #  run: scp -o  StrictHostKeyChecking=no -i C:\Users\trbor\Downloads\POC_AWS.pem ${{ secrets.USER }}@${{ secrets.HOST }}:/home/ec2-user/GitHub_Actions/HelloWorld.war D:\Actions\
-
+    - name: Copy to local from Remote     
+      run: scp -o  StrictHostKeyChecking=no -i C:\Users\trbor\Downloads\POC_AWS.pem ${{ secrets.USER }}@${{ secrets.HOST }}:/home/ec2-user/GitHub_Actions/HelloWorld.war D:\Actions\
+   
+   #Check Servicenow CR number Status
+    - name: Check Servicenow Status
+      shell: pwsh
+      run: |
+               .\CRNum.ps1 -username ${{ secrets.SERVICENOW_USER }} -password ${{ secrets.SERVICENOW_PASSWORD }} -crnumber CHG0030005
+               
 #Starting another Job on different Runner
+
    Upload_to_Remote:
+   
     runs-on: ubuntu-latest
     needs: Build_Deploy
     
@@ -93,7 +102,7 @@ jobs:
    
    #Dpeloy to Tomcat on EC2 Instance
      - name: Step:6 Deploy to Tomcat on EC2
-       run: curl -u ${{ secrets.TOMCAT_USER }}:${{ secrets.TOMCAT_PASSWORD }} -T /home/runner/work/MultiJobs_Pipeline/MultiJobs_Pipeline/target/HelloWorld.war "http://ec2-3-142-248-210.us-east-2.compute.amazonaws.com:8080/manager/text/deploy?path=/SpringApp"
+       run: curl -u ${{ secrets.TOMCAT_USER }}:${{ secrets.TOMCAT_PASSWORD }} -T /home/runner/work/MultiJobs_Pipeline/MultiJobs_Pipeline/target/HelloWorld.war "http://ec2-3-136-85-150.us-east-2.compute.amazonaws.com:8080/manager/text/deploy?path=/SpringApp"
        
        
        
