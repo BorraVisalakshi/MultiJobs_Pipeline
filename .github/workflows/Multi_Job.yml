@@ -9,7 +9,7 @@ on:
  
 jobs:
 
-   Build & Deploy:
+   Build_Deploy:
     runs-on: self-hosted
 
     steps:
@@ -54,7 +54,7 @@ jobs:
 #Starting another Job on different Runner
    Upload to Remote:
     runs-on: ubuntu-latest
-    needs: Build & Deploy
+    needs: Build_Deploy
     
     steps:
    
