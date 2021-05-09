@@ -48,8 +48,8 @@ jobs:
       run: mvn weblogic:deploy
       
   #Copy to local System from Remote Server
-    - name: Copy to local from Remote     
-      run: scp -o  StrictHostKeyChecking=no -i C:\Users\trbor\Downloads\POC_AWS.pem ${{ secrets.USER }}@${{ secrets.HOST }}:/home/ec2-user/GitHub_Actions/HelloWorld.war D:\Actions\
+   # - name: Copy to local from Remote     
+    #  run: scp -o  StrictHostKeyChecking=no -i C:\Users\trbor\Downloads\POC_AWS.pem ${{ secrets.USER }}@${{ secrets.HOST }}:/home/ec2-user/GitHub_Actions/HelloWorld.war D:\Actions\
 
 #Starting another Job on different Runner
    two:
