@@ -52,7 +52,7 @@ jobs:
     #  run: scp -o  StrictHostKeyChecking=no -i C:\Users\trbor\Downloads\POC_AWS.pem ${{ secrets.USER }}@${{ secrets.HOST }}:/home/ec2-user/GitHub_Actions/HelloWorld.war D:\Actions\
 
 #Starting another Job on different Runner
-   Upload to Remote:
+   Upload_to_Remote:
     runs-on: ubuntu-latest
     needs: Build_Deploy
     
