@@ -13,6 +13,7 @@ jobs:
     runs-on: self-hosted
 
     steps:
+    
   #Checkout the code
     - name: Step-1 Checkout the Code
       uses: actions/checkout@v2
@@ -56,7 +57,7 @@ jobs:
     - name: Check Servicenow Status
       shell: pwsh
       run: |
-               .\CRNum.ps1 -username ${{ secrets.SERVICENOW_USER }} -password ${{ secrets.SERVICENOW_PASSWORD }} -crnumber CHG0030005
+            .\CRNum.ps1 -username ${{ secrets.SERVICENOW_USER }} -password ${{ secrets.SERVICENOW_PASSWORD }} -crnumber CHG0030005
                
 #Starting another Job on different Runner
 
