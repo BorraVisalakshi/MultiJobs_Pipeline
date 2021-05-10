@@ -23,38 +23,38 @@ jobs:
       run: mvn clean install
       
   # Upload to artifactory
-    - name: Upload to Artifactory
+    - name: Step-3 Upload to Artifactory
       run:  Remove-item alias:curl;
             curl -X PUT -u ${{ secrets.USERNAME_ARTIFACTORY }}:${{ secrets.PASSWORD_ARTIFACTORY }} -T C:\MultiJobs_Pipeline\SlefHosted\Workspace\MultiJobs_Pipeline\MultiJobs_Pipeline\target\HelloWorld.war "http://localhost:8082/artifactory/CG-libs-release-local/HelloWorld.war"
 
   #Zip the code
-    - name: Step-3 Zip the Source code
+    - name: Step-4 Zip the Source code
       uses: papeloto/action-zip@v1
       with:
           dest: SampleWebApp.zip
           
   #Verify the Zip folder
-    - name: Step-4 Verify Directory
+    - name: Step-5 Verify Directory
       run: dir
       
   #Move the Zip to D: drive
-    - name: Step-5 Move Directory to D drive
+    - name: Step-6 Move Directory to D drive
       run: move SampleWebApp.zip D:\Actions
       
   #Deploy to tomcat
-    - name: Step-6 Deploy to Tomcat
+    - name: Step-7 Deploy to Local Tomcat Server
       run: mvn tomcat7:deploy
       
   #Deploy to Weblogic
-    - name: Step-7  Deploy to Weblogic
+    - name: Step-8  Deploy to Local Weblogic Server
       run: mvn weblogic:deploy
       
   #Copy to local System from Remote Server
-    - name: Copy to local from Remote     
+    - name: Step-9 Copy jar/war to local from Remote Server   
       run: scp -o  StrictHostKeyChecking=no -i C:\Users\trbor\Downloads\POC_AWS.pem ${{ secrets.USER }}@${{ secrets.HOST }}:/home/ec2-user/GitHub_Actions/HelloWorld.war D:\Actions\
    
    #Check Servicenow CR number Statusss
-    - name: Check Servicenow Status
+    - name: Step-10 Check Servicenow CR Number Status
      # shell: pwsh
       run: |
             .\CRNum.ps1 -username ${{ secrets.SERVICENOW_USER }} -password ${{ secrets.SERVICENOW_PASSWORD }} -crnumber ${{ secrets.CR_NUMBER }}
@@ -69,17 +69,17 @@ jobs:
     steps:
    
    #Checkout the code
-     - name: Checkout the code
+     - name: Step-1 Checkout the code
        uses: actions/checkout@v2
        
   #Build with maven
-     - name: Build with maven
+     - name: Step-2 Build with maven
        run: 
             mvn clean;
             mvn install;
 
     #Velify the all the folders in Main Directory     
-     - name: Connect to EC2 via SSH
+     - name: Step-3 Connect to EC2 via SSH
        uses: fifsky/ssh-action@master
        with:
             key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -91,7 +91,7 @@ jobs:
                     ls -a;
 
     #Copy via SCP to remote repository ec2           
-     - name: Copy file via ssh password
+     - name: Step-4 Copy a file via ssh password
        uses: noobly314/deploy-with-scp@v1
        with:
           server-ip: ${{ secrets.SERVER_IP }}
@@ -102,7 +102,7 @@ jobs:
           dest: "/home/ec2-user/GitHub_Actions/" 
    
    #Dpeloy to Tomcat on EC2 Instance
-     - name: Step:6 Deploy to Tomcat on EC2
+     - name: Step:5 Deploy to Tomcat on EC2
        run: curl -u ${{ secrets.TOMCAT_USER }}:${{ secrets.TOMCAT_PASSWORD }} -T /home/runner/work/MultiJobs_Pipeline/MultiJobs_Pipeline/target/HelloWorld.war "http://ec2-18-116-97-166.us-east-2.compute.amazonaws.com:8080/manager/text/deploy?path=/SpringApp"
        
        
