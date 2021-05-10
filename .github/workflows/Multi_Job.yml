@@ -53,7 +53,7 @@ jobs:
     - name: Copy to local from Remote     
       run: scp -o  StrictHostKeyChecking=no -i C:\Users\trbor\Downloads\POC_AWS.pem ${{ secrets.USER }}@${{ secrets.HOST }}:/home/ec2-user/GitHub_Actions/HelloWorld.war D:\Actions\
    
-   #Check Servicenow CR number Status
+   #Check Servicenow CR number Statusss
     - name: Check Servicenow Status
      # shell: pwsh
       run: |
