@@ -103,7 +103,7 @@ jobs:
    
    #Dpeloy to Tomcat on EC2 Instance
      - name: Step:6 Deploy to Tomcat on EC2
-       run: curl -u ${{ secrets.TOMCAT_USER }}:${{ secrets.TOMCAT_PASSWORD }} -T /home/runner/work/MultiJobs_Pipeline/MultiJobs_Pipeline/target/HelloWorld.war "http://ec2-3-136-85-150.us-east-2.compute.amazonaws.com:8080/manager/text/deploy?path=/SpringApp"
+       run: curl -u ${{ secrets.TOMCAT_USER }}:${{ secrets.TOMCAT_PASSWORD }} -T /home/runner/work/MultiJobs_Pipeline/MultiJobs_Pipeline/target/HelloWorld.war "http://ec2-18-116-97-166.us-east-2.compute.amazonaws.com:8080/manager/text/deploy?path=/SpringApp"
        
        
        
