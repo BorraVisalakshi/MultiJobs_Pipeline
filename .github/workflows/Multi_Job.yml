@@ -39,7 +39,8 @@ jobs:
       
   #Move the Zip to D: drive
     - name: Step-6 Move Directory to D drive
-      run: move WebApp.zip U:\Vishali
+      run: U:;
+           move WebApp.zip U:\Vishali
       
   #Deploy to tomcat
     - name: Step-7 Deploy to Local Tomcat Server
