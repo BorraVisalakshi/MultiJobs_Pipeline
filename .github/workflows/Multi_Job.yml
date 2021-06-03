@@ -25,7 +25,7 @@ jobs:
   # Upload to artifactory
     - name: Step-3 Upload to Artifactory
       run:  Remove-item alias:curl;
-            curl -X PUT -u ${{ secrets.USERNAME_ARTIFACTORY }}:${{ secrets.PASSWORD_ARTIFACTORY }} -T C:\MultiJobs_Pipeline\SlefHosted\Workspace\MultiJobs_Pipeline\MultiJobs_Pipeline\target\HelloWorld.war "http://localhost:8082/artifactory/CG-libs-release-local/HelloWorld.war"
+            curl -X PUT -u ${{ secrets.USERNAME_ARTIFACTORY }}:${{ secrets.PASSWORD_ARTIFACTORY }} -T C:\GitHub_Actions\MultiJobs\SelfHosted_runner\Workspace\MultiJobs_Pipeline\MultiJobs_Pipeline\target\HelloWorld.war "http://localhost:8082/artifactory/CG_AEP-libs-release-local/HelloWorld.war"
 
   #Zip the code
     - name: Step-4 Zip the Source code
@@ -39,7 +39,7 @@ jobs:
       
   #Move the Zip to D: drive
     - name: Step-6 Move Directory to D drive
-      run: move WebApp.zip D:\Actions
+      run: move WebApp.zip U:\Vishali
       
   #Deploy to tomcat
     - name: Step-7 Deploy to Local Tomcat Server
