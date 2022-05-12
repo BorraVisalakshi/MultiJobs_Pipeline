@@ -10,7 +10,7 @@ on:
 jobs:
 
    Build_Deploy:
-    runs-on: AEP
+    runs-on: mylabel
 
     steps:
     
